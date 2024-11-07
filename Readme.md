@@ -1,25 +1,32 @@
 
-#Опис проекту
+#
+Опис проекту
 це простий сервер для автентифікації та авторизації користувачів з використанням JWT (JSON Web Tokens). Сервер підтримує 14 користувачів з унікальними логінами та спільним паролем. Проект реалізовано з використанням Netlify Functions та Express.js.
 
-#Демо-версія додатку доступна за посиланням: https://classy-tulumba-9633dc.netlify.app/
+#
+Демо-версія додатку доступна за посиланням: https://classy-tulumba-9633dc.netlify.app/
 
 Облікові дані користувачів
 Користувачі: admin1, admin2, admin3, ..., admin14
 Пароль для всіх користувачів: Qwerty123456!
 Примітка: Кожен користувач має унікальний логін та спільний пароль.
 
-#API Ендпоінти
-##POST /login
+#
+API Ендпоінти
+##
+POST /login
 Опис: Маршрут для входу користувача. Приймає логін та пароль, повертає JWT токен при успішному вході.
 
-#Запит:
+#
+Запит:
 
-##Метод: POST
+##
+Метод: POST
 ```
 URL: https://classy-tulumba-9633dc.netlify.app/.netlify/functions/auth/login
 ```
-###Тіло запиту (JSON):
+###
+Тіло запиту (JSON):
 ```
 {
   "username": "admin1",
@@ -27,7 +34,8 @@ URL: https://classy-tulumba-9633dc.netlify.app/.netlify/functions/auth/login
 }
 ```
 
-###Відповідь при успіху (HTTP 200):
+###
+Відповідь при успіху (HTTP 200):
 
 Тіло відповіді (JSON):
 
@@ -54,10 +62,12 @@ URL: https://classy-tulumba-9633dc.netlify.app/.netlify/functions/auth/login
         "password": "Qwerty123456!"
       }'
 ```
-##GET /protected
+##
+GET /protected
 Опис: Захищений маршрут, доступний лише для автентифікованих користувачів. Повертає привітання з логіном користувача.
 
-###Метод: GET
+###
+Метод: GET
 ```
 URL: https://classy-tulumba-9633dc.netlify.app/.netlify/functions/auth/protected
 ```
@@ -87,11 +97,13 @@ Authorization: Bearer <JWT токен>
   -H "Authorization: Bearer <JWT токен>"
 ```  
 
-##POST /logout
+##
+POST /logout
 Опис: Маршрут для виходу користувача. Очищує токен на клієнті.
 Запит:
 
-##Метод: POST
+##
+Метод: POST
 URL: https://classy-tulumba-9633dc.netlify.app/.netlify/functions/auth/logout
 Заголовки:
 Authorization: Bearer <JWT токен>
@@ -111,9 +123,12 @@ POST
   -H "Authorization: Bearer <JWT токен>"
 
 ```
+
+###
 Використання на фронтенді
 Фронтенд додатку знаходиться у файлі public/index.html. Він дозволяє користувачам виконувати вхід, отримувати доступ до захищених даних та виконувати вихід.
 
+###
 Основні функції
 Вхід:
 
