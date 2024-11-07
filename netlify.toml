@@ -1,0 +1,7 @@
+[build]
+  functions = "functions"
+  publish = "public"
+
+[dev]
+  command = "npm start"
+  port = 8888
