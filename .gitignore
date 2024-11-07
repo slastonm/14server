@@ -1,0 +1,10 @@
+# Ігнорування папки node_modules
+node_modules/
+
+# Ігнорування файлів логів
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Ігнорування системних файлів
+.DS_Store

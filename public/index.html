@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8" />
+    <title>Simple Auth App</title>
+</head>
+<body>
+    <h1>Simple Auth App</h1>
+
+    <div>
+        <h2>Вхід</h2>
+        <input type="text" id="username" placeholder="Логін" />
+        <input type="password" id="password" placeholder="Пароль" />
+        <button onclick="login()">Вхід</button>
+    </div>
+
+    <div>
+        <h2>Дії</h2>
+        <button onclick="getProtected()">Отримати захищені дані</button>
+        <button onclick="logout()">Вихід</button>
+    </div>
+
+    <script>
+        let token = '';
+
+        async function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('/.netlify/functions/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+            const data = await response.json();
+            if (response.ok) {
+                token = data.token;
+                console.log('Успішний вхід:', data);
+            } else {
+                console.log('Помилка входу:', data.message);
+            }
+        }
+
+        async function getProtected() {
+            const response = await fetch('/.netlify/functions/auth/protected', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await response.json();
+            if (response.ok) {
+                console.log('Захищені дані:', data);
+            } else {
+                console.log('Помилка доступу:', data.message);
+            }
+        }
+
+        async function logout() {
+            const response = await fetch('/.netlify/functions/auth/logout', {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await response.json();
+            if (response.ok) {
+                token = '';
+                console.log('Вихід успішний:', data);
+            } else {
+                console.log('Помилка виходу:', data.message);
+            }
+        }
+    </script>
+</body>
+</html>
